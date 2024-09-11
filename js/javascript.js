@@ -2,15 +2,10 @@
 let humanScore = 0;
 console.log("The human score is " + humanScore.toString());
 let computerScore = 0;
-console.log("The computer socre is " + computerScore.toString());
+console.log("The computer score is " + computerScore.toString());
+let playRoundReturn = "";
 
-let choiceHuman = prompt("Please, insert your choice for the Rock Paper Scissors", "PAPER");
-let funHumanChoice = getHumanChoice(choiceHuman);
-let funComputerChoice = getComputerChoice();
-console.log("The computer choice is " + funComputerChoice);
-let roundResult = playRound(funHumanChoice, funComputerChoice);
-console.log(roundResult);
-console.log("Now the human score is " + humanScore + " and the computer socre is " + computerScore)
+playGame();
 
 //Compare the function to compare the results from the computer and the user
 function playRound(humanChoice, computerChoice){
@@ -21,13 +16,13 @@ function playRound(humanChoice, computerChoice){
                 break;
             
             case "PAPER":
-                return "You win! PAPER beats ROCK";
                 humanScore++;
+                playRoundReturn = "You win! PAPER beats ROCK";
                 break;
 
             case "SCISSOR":
-                return "You lose! ROCK beats SCISSOR";
                 computerScore++;
+                playRoundReturn = "You lose! ROCK beats SCISSOR";
                 break;
         }
     }
@@ -35,16 +30,16 @@ function playRound(humanChoice, computerChoice){
     if (computerChoice == "PAPER"){
         switch (humanChoice){
             case "ROCK":
-                return "You lose! PAPER beats ROCK";
+                playRoundReturn = "You lose! PAPER beats ROCK";
                 computerScore++;
                 break;
             
             case "PAPER":
-                return "It`s a tie!";
+                playRoundReturn = "It`s a tie!";
                 break;
 
             case "SCISSOR":
-                return "You win! SCISSOR beats PAPER";
+                playRoundReturn = "You win! SCISSOR beats PAPER";
                 humanScore++;
                 break;
         }
@@ -53,17 +48,17 @@ function playRound(humanChoice, computerChoice){
     if (computerChoice == "SCISSOR"){
         switch (humanChoice){
             case "ROCK":
-                return "You win! ROCK beats SCISSOR";
+                playRoundReturn = "You win! ROCK beats SCISSOR";
                 humanScore++;
                 break;
             
             case "PAPER":
-                return "You lose! SCISSOR beats PAPER";
+                playRoundReturn = "You lose! SCISSOR beats PAPER";
                 computerScore++;
                 break;
 
             case "SCISSOR":
-                return "It's a tie!";
+                playRoundReturn = "It's a tie!";
                 break;
         }
     }
@@ -88,5 +83,28 @@ function getComputerChoice (){
     }else if(rnm > 0.66 && rnm <= 1){
         return "SCISSOR";
 
+    }
+}
+
+//Create a function to play 5 rounds
+function playGame (){
+    console.log(`Entrou aqui na funcao`);
+    for (let i = 0; i <= 5; i++) {
+        console.log(`Entrou no for loop`);
+        let choiceHuman = prompt("Please, insert your choice for the Rock Paper Scissors", "PAPER");
+        let funHumanChoice = getHumanChoice(choiceHuman);
+        let funComputerChoice = getComputerChoice();
+        playRound(funHumanChoice, funComputerChoice);
+        console.log(playRoundReturn);
+    }
+
+    if (computerScore > humanScore){
+        console.log(`The computer wins with ${computerScore} and you lose with ${humanScore}`);
+    }  
+    else if (humanScore > computerScore){
+        console.log(`The computer loses with ${computerScore} and you win with ${humanScore}`);
+    } 
+    else{
+        console.log(`It's a tie between you two. I don't know how it is possible, but...`);
     }
 }
