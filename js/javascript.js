@@ -73,29 +73,21 @@ function getHumanChoice(choice){
 
 //Create a function that will return rock, paper or scissor with a random frequency as the computer
 function getComputerChoice (){
-    let rnm = Math.random();
-    if(rnm >= 0 && rnm <= 0.33){
-        return "ROCK";
-
-    }else if(rnm > 0.33 && rnm <= 0.66){
-        return "PAPER";
-
-    }else if(rnm > 0.66 && rnm <= 1){
-        return "SCISSOR";
-
-    }
+    let rnm = Math.floor(Math.random() * 3);
+    let options = ["ROCK", "PAPER", "SCISSOR"];
+    let computerChoice = options[rnm];
+    return computerChoice;
 }
 
 //Create a function to play 5 rounds
 function playGame (){
-    console.log(`Entrou aqui na funcao`);
     for (let i = 0; i <= 5; i++) {
-        console.log(`Entrou no for loop`);
         let choiceHuman = prompt("Please, insert your choice for the Rock Paper Scissors", "PAPER");
         let funHumanChoice = getHumanChoice(choiceHuman);
         let funComputerChoice = getComputerChoice();
         playRound(funHumanChoice, funComputerChoice);
         console.log(playRoundReturn);
+
     }
 
     if (computerScore > humanScore){
